@@ -55,6 +55,20 @@ h2 {
   cursor: pointer;
   width: 100%;
   transition: background 0.3s;
+
+}
+#copy{
+  background: linear-gradient(45deg, #00aaff, #7e6ee7);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s;
+
+  margin-top: 5px;
 }
 
 #generate:hover {

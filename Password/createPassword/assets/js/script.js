@@ -1,46 +1,79 @@
-const form = document.querySelector('.form');
-const generate = document.querySelector('#generate');
-const inputPassword = document.querySelector('#password');
+(() => {
+  const generatePasswordForm = document.querySelector('.form');
+  const generate = document.querySelector('#generate');
+  const inputPassword = document.querySelector('#password');
+  const copyButton = document.querySelector('#copy');
+  
+  function copyPassword() {
+    const password = document.getElementById("password").value;
+    
+    navigator.clipboard.writeText(password) // Copia para a área de transferência
+        .then(() => {
+          if(password === ''){
+            console.log('Valor Vazio');
+          } else{
+            console.log('Copiado');
+          }
+        })
+        .catch(err => console.error("Erro ao copiar:", err));
+  }
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
-  const uppercase = document.querySelector('#uppercase').checked;
-  const lowercase = document.querySelector('#lowercase').checked;
-  const numbers = document.querySelector('#numbers').checked;
-  const symbols = document.querySelector('#symbols').checked;
-  const passwordLength = document.querySelector('#length').value;
+  function gerarSenha(uppercase, lowercase, numbers, symbols, length) {
+    const letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
+    const numeros = "0123456789";
+    const simbolos = "!@#$%^&*()_+[]{}|;:,.<>?";
+    debugger
+    let allChars = "";
+    let generatePassword = [];
+
+    // Garantir que pelo menos um de cada tipo selecionado seja incluído
+    if (uppercase) {
+        generatePassword.push(letrasMaiusculas[Math.floor(Math.random() * letrasMaiusculas.length)]);
+        allChars += letrasMaiusculas;
+    }
+    if (lowercase) {
+        generatePassword.push(letrasMinusculas[Math.floor(Math.random() * letrasMinusculas.length)]);
+        allChars += letrasMinusculas;
+    }
+    if (numbers) {
+        generatePassword.push(numeros[Math.floor(Math.random() * numeros.length)]);
+        allChars += numeros;
+    }
+    if (symbols) {
+        generatePassword.push(simbolos[Math.floor(Math.random() * simbolos.length)]);
+        allChars += simbolos;
+    }
+
+    // Preencher o restante da senha aleatoriamente
+    for (let i = generatePassword.length; i < length; i++) {
+        generatePassword.push(allChars[Math.floor(Math.random() * allChars.length)]);
+    }
+
+    return generatePassword.join("");
+  }
+
+  copyButton.addEventListener('click', () => {
+    copyPassword();
+  })
+
+  generatePasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+  });
 
   generate.addEventListener('click', () => {
+    const uppercase = document.querySelector('#uppercase').checked;
+    const lowercase = document.querySelector('#lowercase').checked;
+    const numbers = document.querySelector('#numbers').checked;
+    const symbols = document.querySelector('#symbols').checked;
+    const passwordLength = document.querySelector('#length').value;
+
     if(!uppercase && !lowercase && !numbers && !symbols){
       inputPassword.placeholder = "Selecione alguma opção"
     }
 
-    inputPassword.value = createPassword();
+    let passwordValue = gerarSenha(uppercase, lowercase, numbers, symbols, passwordLength);
+
+    inputPassword.value = passwordValue;
   });
-
-  function createPassword(){
-    const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-    const numberChars = "0123456789";
-    const symbolChars = "!@#$%^&*()_+[]{}<>?/";
-
-    const getRandomChar = (chars) => chars[Math.floor(Math.random() * chars.length)];
-
-    let password = '';
-    let availableChars = '';
-
-    if (uppercase) availableChars += uppercaseChars;
-    if (lowercase) availableChars += lowercaseChars;
-    if (numbers) availableChars += numberChars;
-    if (symbols) availableChars += symbolChars;
-
-    if (availableChars.length === 0) return '';
-
-    for (let i = 0; i < passwordLength; i++) {
-      password += getRandomChar(availableChars);
-    }
-
-    return password;
-  }
-
-});
+})();

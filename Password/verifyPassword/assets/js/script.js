@@ -1,5 +1,5 @@
 function verifyPassword(){
-  const form = document.querySelector(".form");
+  const verifyPasswordForm = document.querySelector(".form");
   const character = document.querySelector('#character');
   const lowerCase = document.querySelector('#lower-case');
   const upperCase = document.querySelector('#upper-case');
@@ -7,11 +7,13 @@ function verifyPassword(){
   const number = document.querySelector('#number');
   const res = document.querySelector('.res');
 
-  form.addEventListener("submit", function(event) {
+  // Colocar função do evento aqui.
+
+  verifyPasswordForm.addEventListener("submit", function(event) {
     event.preventDefault();
   });
 
-  form.addEventListener('input', ()=>{
+  verifyPasswordForm.addEventListener('input', ()=>{
 
     const password = document.querySelector(".password").value;
 
@@ -28,7 +30,7 @@ function verifyPassword(){
       specialCharacter.checked = hasSpecialCharacter;
       number.checked = hasNumber;
 
-    if(character.checked &&
+      if(character.checked &&
         upperCase.checked &&
         lowerCase.checked &&
         specialCharacter.checked &&
@@ -47,10 +49,3 @@ function verifyPassword(){
 }
 
 verifyPassword()
-
-
-/* <label for=""><input type="checkbox" name="" id="character"> 8 caracteres</label>
-<label for=""><input type="checkbox" name="" id="lower-case"> Uma letra minúscula</label>
-<label for=""><input type="checkbox" name="" id="upper-case"> Uma letra maiúscula</label>
-<label for=""><input type="checkbox" name="" id="number"> Um número</label>
-<label for=""><input type="checkbox" name="" id="especial-character"> Um caractere especial (!@#$%^&*(),.?)</label> */
