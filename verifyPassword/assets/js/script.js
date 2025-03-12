@@ -6,7 +6,7 @@ function verifyPassword(){
   const specialCharacter = document.querySelector('#special-character');
   const number = document.querySelector('#number');
   const res = document.querySelector('.res');
-  res.innerHTML = `<p class="blank">Digite a sua senha.</p>`;
+  res.innerHTML = `<p class="blank">Digite a sua senha abaixo.</p>`;
 
   function testPassword(){
     const password = document.querySelector(".password").value;
@@ -15,7 +15,7 @@ function verifyPassword(){
     const hasLowerCase = /[a-z]/.test(password);
     const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
     const hasNumber = /[0-9]/.test(password);
-    const passwordChecked = [];
+    const passwordChecked = [1];
 
     character.checked = hasMinLength;
     upperCase.checked = hasUpperCase;
@@ -28,22 +28,19 @@ function verifyPassword(){
     if(upperCase.checked) passwordChecked.push(upperCase);
     if(lowerCase.checked) passwordChecked.push(lowerCase);
     if(specialCharacter.checked) passwordChecked.push(specialCharacter);
-
+    
     for(let i in passwordChecked){
-      if(i >= 0 && i <= 2) res.innerHTML = `<p class="weak">Senha fraca</p>`;
-      if(i >= 2 && i <= 3) res.innerHTML = `<p class="medium">Senha média</p>`;
-      if(i >= 4) res.innerHTML = `<p class="strong">Senha forte</p>`;
+      if(i >= 1 && i <= 3) res.innerHTML = `<p class="weak">Senha fraca</p>`;
+      if(i >= 3 && i <= 4) res.innerHTML = `<p class="medium">Senha média</p>`;
+      if(i >= 5) res.innerHTML = `<p class="strong">Senha forte</p>`;
+      if(i <1 ) res.innerHTML = `<p class="blank">Digite a sua senha abaixo.</p>`;
     }
 
   }
 
-  verifyPasswordForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-  });
-
   verifyPasswordForm.addEventListener('input', ()=>{
     testPassword()
-  })
+  });
 }
 
 verifyPassword()
