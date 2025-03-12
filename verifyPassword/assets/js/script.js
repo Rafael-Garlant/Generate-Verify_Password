@@ -6,45 +6,43 @@ function verifyPassword(){
   const specialCharacter = document.querySelector('#special-character');
   const number = document.querySelector('#number');
   const res = document.querySelector('.res');
+  res.innerHTML = `<p class="blank">Digite a sua senha.</p>`;
 
-  // Colocar função do evento aqui.
+  function testPassword(){
+    const password = document.querySelector(".password").value;
+    const hasMinLength = password.length >= 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const passwordChecked = [];
+
+    character.checked = hasMinLength;
+    upperCase.checked = hasUpperCase;
+    lowerCase.checked = hasLowerCase;
+    specialCharacter.checked = hasSpecialCharacter;
+    number.checked = hasNumber;
+
+    if(number.checked) passwordChecked.push(number);
+    if(character.checked) passwordChecked.push(character);
+    if(upperCase.checked) passwordChecked.push(upperCase);
+    if(lowerCase.checked) passwordChecked.push(lowerCase);
+    if(specialCharacter.checked) passwordChecked.push(specialCharacter);
+
+    for(let i in passwordChecked){
+      if(i >= 0 && i <= 2) res.innerHTML = `<p class="weak">Senha fraca</p>`;
+      if(i >= 2 && i <= 3) res.innerHTML = `<p class="medium">Senha média</p>`;
+      if(i >= 4) res.innerHTML = `<p class="strong">Senha forte</p>`;
+    }
+
+  }
 
   verifyPasswordForm.addEventListener("submit", function(event) {
     event.preventDefault();
   });
 
   verifyPasswordForm.addEventListener('input', ()=>{
-
-    const password = document.querySelector(".password").value;
-
-    function testPassword(){
-      const hasMinLength = password.length >= 8;
-      const hasUpperCase = /[A-Z]/.test(password);
-      const hasLowerCase = /[a-z]/.test(password);
-      const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-      const hasNumber = /[0-9]/.test(password);
-
-      character.checked = hasMinLength;
-      upperCase.checked = hasUpperCase;
-      lowerCase.checked = hasLowerCase;
-      specialCharacter.checked = hasSpecialCharacter;
-      number.checked = hasNumber;
-
-      if(character.checked &&
-        upperCase.checked &&
-        lowerCase.checked &&
-        specialCharacter.checked &&
-        number.checked){
-
-        res.innerHTML = '<p>Senha Válida.</p>'
-      } else{
-
-        res.innerHTML = '<p>Senha Inválida.</p>'
-      }
-    }
-
     testPassword()
-    
   })
 }
 

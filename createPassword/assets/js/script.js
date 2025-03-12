@@ -35,31 +35,31 @@
 }
 
 
-  function gerarSenha(uppercase, lowercase, numbers, symbols, length) {
-    const letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
-    const numeros = "0123456789";
-    const simbolos = "!@#$%^&*()_+[]{}|;:,.<>?";
+  function generatePasswordFunction(uppercase, lowercase, numbers, symbols, length) {
+    const uppercaseLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercaseLetter = "abcdefghijklmnopqrstuvwxyz";
+    const numbersPassword = "0123456789";
+    const symbolsPassword = "!@#$%^&*()_+[]{}|;:,.<>?";
     
     let allChars = "";
     let generatePassword = [];
 
     // Garantir que pelo menos um de cada tipo selecionado seja incluído
     if (uppercase) {
-        generatePassword.push(letrasMaiusculas[Math.floor(Math.random() * letrasMaiusculas.length)]);
-        allChars += letrasMaiusculas;
+        generatePassword.push(uppercaseLetter[Math.floor(Math.random() * uppercaseLetter.length)]);
+        allChars += uppercaseLetter;
     }
     if (lowercase) {
-        generatePassword.push(letrasMinusculas[Math.floor(Math.random() * letrasMinusculas.length)]);
-        allChars += letrasMinusculas;
+        generatePassword.push(lowercaseLetter[Math.floor(Math.random() * lowercaseLetter.length)]);
+        allChars += lowercaseLetter;
     }
     if (numbers) {
-        generatePassword.push(numeros[Math.floor(Math.random() * numeros.length)]);
-        allChars += numeros;
+        generatePassword.push(numbersPassword[Math.floor(Math.random() * numbersPassword.length)]);
+        allChars += numbersPassword;
     }
     if (symbols) {
-        generatePassword.push(simbolos[Math.floor(Math.random() * simbolos.length)]);
-        allChars += simbolos;
+        generatePassword.push(symbolsPassword[Math.floor(Math.random() * symbolsPassword.length)]);
+        allChars += symbolsPassword;
     }
 
     // Preencher o restante da senha aleatoriamente
@@ -89,7 +89,7 @@
       inputPassword.placeholder = "Selecione alguma opção"
     }
 
-    let passwordValue = gerarSenha(uppercase, lowercase, numbers, symbols, passwordLength);
+    let passwordValue = generatePasswordFunction(uppercase, lowercase, numbers, symbols, passwordLength);
 
     inputPassword.value = passwordValue;
   });

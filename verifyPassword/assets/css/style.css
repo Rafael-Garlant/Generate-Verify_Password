@@ -82,6 +82,43 @@ input[type="checkbox"] {
   font-weight: bold;
 }
 
+#content{
+  margin: 0 auto;
+}
+
+.blank{
+    background-color: #e4e4e4; 
+    color: #333; 
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #ccc; 
+}
+.weak {
+  background-color: #E63946; 
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.medium {
+  background-color: #F4A261;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.strong {
+  background-color: #2A9D8F; 
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
 /* Responsividade */
 @media (max-width: 500px) {
   .form {
