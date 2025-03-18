@@ -35,7 +35,6 @@ function verifyPassword(){
       if(i >= 5) res.innerHTML = `<p class="strong">Senha forte</p>`;
       if(i <1 ) res.innerHTML = `<p class="blank">Digite a sua senha abaixo.</p>`;
     }
-
   }
 
   verifyPasswordForm.addEventListener('input', ()=>{

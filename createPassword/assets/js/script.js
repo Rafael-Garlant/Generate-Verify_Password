@@ -85,6 +85,29 @@
     const symbols = document.querySelector('#symbols').checked;
     const passwordLength = document.querySelector('#length').value;
 
+    if(passwordLength < 5){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Tamanho da senha inválido!',
+        text: 'Selecione o tamanho correto da senha.',
+        confirmButtonColor: '#3085d6',
+        width: '300',
+        height: '100'
+      })
+      return
+    } else if(passwordLength > 20){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Tamanho da senha inválido!',
+        text: 'Selecione o tamanho correto da senha.',
+        confirmButtonColor: '#3085d6',
+        width: '300',
+        height: '100'
+      })
+        return
+    }
+
+    
     if(!uppercase && !lowercase && !numbers && !symbols){
       inputPassword.placeholder = "Selecione alguma opção"
     }
